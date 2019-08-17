@@ -8,6 +8,23 @@
     <link rel="stylesheet" href="./index.css" />
   </head>
   <body>
-    <p>Hello</p>
+    <form action="/tweet" method="post">
+      <label for="tweet">Post your tweet</label>
+      <input type="text" name="tweet" id="tweet" />
+      <input type="submit" value="Submit Tweet" />
+    </form>
+    <div id="tweets"></div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+      let tweetsElem = document.getElementById('tweets');
+
+      axios.get('/tweets').then(response => {
+        const tweets = response.data;
+        tweets.map(tweet => {
+          tweetsElem.append(tweet + ' ');
+        });
+      });
+    </script>
   </body>
 </html>
